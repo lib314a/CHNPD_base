@@ -19,10 +19,10 @@ set fout = "${opref}_${blab}.nii.gz"
     -b "$mset" \
     -expr 'a*b' \
     -prefix ${fout}                 \
-    -nscale -short
+    -fscale -short
 
 # use same brick labels as original nii
-3drefit -sublabel 0 "$blab" $fout
+3drefit -space MNI -sublabel 0 "$blab" $fout
 
 echo "\n\n++ Done: ${fout}\n\n"
 
@@ -42,10 +42,10 @@ set fout = "${opref}_${blab}.nii.gz"
     -a "$iset"                      \
     -expr 'a' \
     -prefix ${fout}                 \
-    -nscale -short
+    -fscale -short
 
 # use same brick labels as original nii
-3drefit -sublabel 0 "$blab" $fout
+3drefit -space MNI -sublabel 0 "$blab" $fout
 
 echo "\n\n++ Done: ${fout}\n\n"
 
@@ -113,10 +113,10 @@ set fout = "${opref}_${blab}.nii.gz"
     -b ${tpref}_02h.nii.gz          \
     -expr 'a+0.1*b'                 \
     -prefix ${fout}                 \
-    -nscale -short
+    -fscale -short
 
 # use same brick labels as original MNI152_2009_template
-3drefit -sublabel 0 "$blab" $fout
+3drefit -space MNI -sublabel 0 "$blab" $fout
 
 \rm ${tpref}*
 
@@ -135,7 +135,7 @@ set fout  = "${opref}_${blab}.nii.gz"
   -prefix $fout
 
 # use same brick labels as original MNI152_2009_template
-3drefit -sublabel 0 "$blab" $fout
+3drefit -space MNI -sublabel 0 "$blab" $fout
 
 echo "\n\n++ Done: ${fout}\n\n"
 
@@ -149,10 +149,10 @@ set fout  = "${opref}_${blab}.nii.gz"
   -a "$gset" \
   -expr 'step(a-0.4)' \
   -prefix $fout
-# Maybe it's better to keep the original image?
+# NOTE: criterion (0.4 here) to be determined
 
 # use same brick labels as original MNI152_2009_template
-3drefit -sublabel 0 "$blab" $fout
+3drefit -space MNI -sublabel 0 "$blab" $fout
 
 echo "\n\n++ Done: ${fout}\n\n"
 
@@ -215,7 +215,7 @@ endif
     -expr 'a'                       \
     -prefix ${oset}                 \
     -datum short                    \
-    -nscale
+    -fscale
 
 # clean up
 \rm ${tpref}*
